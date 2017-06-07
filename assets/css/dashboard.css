@@ -1,0 +1,21 @@
+body {
+    font-family: monospace;
+    font-size: 10px;
+    width: 800px;
+    min-height: 100px;
+    padding: 10px 5px;
+}
+
+.container {
+    margin: 10px auto;
+    padding: 0;
+}
+
+#history th,
+#history td {
+    text-align: center;
+}
+
+#history tfoot {
+    font-weight: bold;
+}

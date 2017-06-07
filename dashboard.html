@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+<head>
+    <title>My Bitcoins</title>
+    <link href="assets/css/bootstrap-v3.3.7.min.css" rel="stylesheet"/>
+    <link href="assets/css/dashboard.css" rel="stylesheet"/>
+    <script src="assets/js/jquery-v2.1.3.min.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <div class="panel panel-default">
+                <div class="panel-heading">Meus investimentos</div>
+
+                <table id="history" class="table table-condensed">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th>R$ Compra</th>
+                        <th>R$ Investido</th>
+                        <th>R$ Taxa</th>
+                        <th>R$ Saldo</th>
+                        <th>฿ Taxa</th>
+                        <th>฿ Saldo</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="bg-success">
+                        <td><span class="glyphicon glyphicon-minus"></span></td>
+                        <td>C</td>
+                        <td>R$7.169,85</td>
+                        <td>R$100,00</td>
+                        <td>R$4,89</td>
+                        <td>R$95,11</td>
+                        <td>฿0,00009</td>
+                        <td>฿0,01317241</td>
+                    </tr>
+                    <tr class="bg-success">
+                        <td><span class="glyphicon glyphicon-minus"></span></td>
+                        <td>C</td>
+                        <td>R$9.597,86</td>
+                        <td>R$922,00</td>
+                        <td>R$21,25</td>
+                        <td>R$900,75</td>
+                        <td>฿0,00066</td>
+                        <td>฿0,09319</td>
+                    </tr>
+                    <tr>
+                        <td><span class="glyphicon glyphicon-plus"></span></td>
+                        <td></td>
+                        <td></td>
+                        <td id="insert-invested"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td id="insert-bitcoin"></td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td class="text-right" colspan="3">Totais:</td>
+                        <td>R$1022,00</td>
+                        <td>R$26,14</td>
+                        <td>R$995,86</td>
+                        <td>฿0,00075</td>
+                        <td>฿0,10636</td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-3 text-center">
+            <div class="panel panel-default">
+                <div class="panel-heading">Valor de Compra</div>
+                <div id="buy" class="panel-body"></div>
+            </div>
+        </div>
+        <div class="col-sm-3 text-center">
+            <div class="panel panel-default">
+                <div class="panel-heading">Valor de Venda</div>
+                <div id="sell" class="panel-body"></div>
+            </div>
+        </div>
+        <div class="col-sm-3 text-center">
+            <div class="panel panel-default">
+                <div class="panel-heading">Valor Investido</div>
+                <div id="invested" class="panel-body"></div>
+            </div>
+        </div>
+        <div class="col-sm-3 text-center">
+            <div class="panel panel-default">
+                <div class="panel-heading">Valor Atual</div>
+                <div id="current" class="panel-body"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2 text-center">
+            <div class="panel panel-default">
+                <div class="panel-heading">Taxa</div>
+                <div id="changeTaxe" class="panel-body"></div>
+            </div>
+        </div>
+        <div class="col-sm-2 text-center">
+
+            <div class="panel panel-default sm">
+                <div class="panel-heading">Troca</div>
+                <div id="change" class="panel-body"></div>
+            </div>
+        </div>
+        <div class="col-sm-2 text-center">
+            <div class="panel panel-default">
+                <div class="panel-heading">Ganho</div>
+                <div id="changeWin" class="panel-body"></div>
+            </div>
+        </div>
+
+        <div class="col-sm-2 text-center">
+            <div class="panel panel-default">
+                <div class="panel-heading">Taxa</div>
+                <div id="pushTaxe" class="panel-body"></div>
+            </div>
+        </div>
+        <div class="col-sm-2 text-center">
+            <div class="panel panel-default">
+                <div class="panel-heading">Saque</div>
+                <div id="push" class="panel-body"></div>
+            </div>
+        </div>
+        <div class="col-sm-2 text-center">
+            <div class="panel panel-default">
+                <div class="panel-heading">Ganho</div>
+                <div id="pushWin" class="panel-body"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
