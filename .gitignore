@@ -1,1 +1,4 @@
 .idea/
+node_modules
+app/assets/node
+app/env.json

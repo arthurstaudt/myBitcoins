@@ -1,0 +1,87 @@
+body {
+    font-family: monospace;
+    font-size: 10px;
+    width: 800px;
+    min-height: 100px;
+    padding: 10px 5px;
+    background: #fff url('../images/bg.png') no-repeat;
+}
+
+.container {
+    margin: 10px auto;
+    padding: 0;
+}
+
+.panel {
+    box-shadow: 1px 1px 3px #888;
+}
+
+.panel-heading {
+    padding: 4px 15px;
+}
+
+.panel-body {
+    padding: 5px 15px;
+}
+
+#history th,
+#history td {
+    text-align: center;
+}
+
+#history tfoot {
+    font-weight: bold;
+}
+
+.bitcoin-icon {
+    font-size: 70px;
+    text-shadow: 3px 3px 2px #333;
+    color: orange;
+    margin-bottom: 10px;
+}
+
+.card-icon {
+    font-size: 70px;
+    color: #8548a9;
+    text-shadow: 3px 3px 3px #ccc;
+    margin-bottom: 10px;
+}
+
+.pig-icon {
+    font-size: 70px;
+    color: #007320;
+    text-shadow: 3px 3px 3px #ccc;
+    margin-bottom: 10px;
+}
+
+.transaction-icon {
+    font-size: 30px;
+    margin: 10px 0 50px;
+    text-shadow: 3px 3px 2px #ccc;
+}
+
+.label {
+    font-size: 10px;
+}
+
+.icons-charts {
+    margin-bottom: 20px;
+}
+
+.results {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.infos {
+    float: right;
+    width: 50px;
+    font-size: 10px;
+    font-weight: normal;
+    line-height: 16px;
+    margin-top: -5px;
+}
+
+.up-down {
+    cursor: pointer;
+}

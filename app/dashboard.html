@@ -2,9 +2,10 @@
 <html>
 <head>
     <title>My Bitcoins</title>
-    <link href="assets/css/bootstrap-v3.3.7.min.css" rel="stylesheet"/>
+    <link href="assets/node/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="assets/css/dashboard.css" rel="stylesheet"/>
-    <script src="assets/js/jquery-v2.1.3.min.js"></script>
+    <script src="assets/node/js/jquery.min.js"></script>
+    <script src="assets/js/background.js"></script>
     <script src="assets/js/dashboard.js"></script>
 </head>
 <body>
@@ -14,9 +15,12 @@
     <div class="row">
         <div class="col-sm-12 text-center">
             <div class="panel panel-default">
-                <div class="panel-heading">Meus investimentos</div>
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-chevron-down pull-left up-down"></span>
+                    Meus investimentos
+                </div>
 
-                <table id="history" class="table table-condensed">
+                <table id="history" class="table table-condensed" style="display: none">
                     <thead>
                     <tr>
                         <th></th>
@@ -79,13 +83,13 @@
     <div class="row">
         <div class="col-sm-3 text-center">
             <div class="panel panel-default">
-                <div class="panel-heading">Valor de Compra</div>
+                <div class="panel-heading">M. Bitcoin compra por</div>
                 <div id="buy" class="panel-body"></div>
             </div>
         </div>
         <div class="col-sm-3 text-center">
             <div class="panel panel-default">
-                <div class="panel-heading">Valor de Venda</div>
+                <div class="panel-heading">M. Bitcoin vende por</div>
                 <div id="sell" class="panel-body"></div>
             </div>
         </div>
@@ -103,43 +107,44 @@
         </div>
     </div>
 
+    <div class="row icons-charts">
+        <div class="col-sm-2 col-sm-offset-1 text-center">
+            <span class="bitcoin-icon glyphicon glyphicon-bitcoin"></span><br/>
+            <span id="my-bitcoins"></span>
+        </div>
+        <div class="col-sm-2 text-center">
+            <span id="change-taxe"></span><br/>
+            <span class="transaction-icon glyphicon glyphicon-transfer"></span>
+        </div>
+        <div class="col-sm-2 text-center">
+            <span class="card-icon glyphicon glyphicon-credit-card"></span>
+            <div id="change"></div>
+        </div>
+        <div class="col-sm-2 text-center">
+            <span id="push-taxe"></span><br/>
+            <span class="transaction-icon glyphicon glyphicon-transfer"></span>
+        </div>
+        <div class="col-sm-2 text-center">
+            <span class="pig-icon glyphicon glyphicon-piggy-bank"></span>
+            <div id="push"></div>
+        </div>
+    </div>
+
     <div class="row">
-        <div class="col-sm-2 text-center">
+        <div class="col-sm-4 col-sm-offset-2 text-center">
             <div class="panel panel-default">
-                <div class="panel-heading">Taxa</div>
-                <div id="changeTaxe" class="panel-body"></div>
+                <div class="panel-heading">Valor Convertido</div>
+                <div id="change-win" class="panel-body results">
+                    <div class="infos"></div>
+                </div>
             </div>
         </div>
-        <div class="col-sm-2 text-center">
-
-            <div class="panel panel-default sm">
-                <div class="panel-heading">Troca</div>
-                <div id="change" class="panel-body"></div>
-            </div>
-        </div>
-        <div class="col-sm-2 text-center">
+        <div class="col-sm-4 text-center">
             <div class="panel panel-default">
-                <div class="panel-heading">Ganho</div>
-                <div id="changeWin" class="panel-body"></div>
-            </div>
-        </div>
-
-        <div class="col-sm-2 text-center">
-            <div class="panel panel-default">
-                <div class="panel-heading">Taxa</div>
-                <div id="pushTaxe" class="panel-body"></div>
-            </div>
-        </div>
-        <div class="col-sm-2 text-center">
-            <div class="panel panel-default">
-                <div class="panel-heading">Saque</div>
-                <div id="push" class="panel-body"></div>
-            </div>
-        </div>
-        <div class="col-sm-2 text-center">
-            <div class="panel panel-default">
-                <div class="panel-heading">Ganho</div>
-                <div id="pushWin" class="panel-body"></div>
+                <div class="panel-heading">Valor para Saque</div>
+                <div id="push-win" class="panel-body results">
+                    <div class="infos"></div>
+                </div>
             </div>
         </div>
     </div>

@@ -1,0 +1,32 @@
+{
+	"manifest_version": 2,
+	"name": "Meus Ganhos - Mercado Bitcoin",
+	"version": "1.4.0",
+	"description": "Mercado Bitcoin",
+    "icons": {
+        "48": "assets/images/icon48.png",
+        "128": "assets/images/icon128.png"
+    },
+    "browser_action": {
+        "default_icon": {
+            "19" : "assets/images/icon19.png",
+            "38" : "assets/images/icon38.png"
+        },
+        "default_popup": "dashboard.html"
+    },
+    "background": {
+        "scripts": [
+            "assets/node/js/jquery.min.js",
+            "assets/node/js/crypto-js.js",
+            "assets/js/background.js"
+        ],
+        "persistent": true
+    },
+    "permissions": [
+        "tabs",
+        "declarativeContent",
+        "storage",
+        "https://www.mercadobitcoin.net/api/v2/ticker/",
+        "https://www.mercadobitcoin.net/tapi/v3/"
+    ]
+}
