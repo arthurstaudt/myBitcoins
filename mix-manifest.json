@@ -1,4 +1,5 @@
 {
     "/app/assets/node/js/jquery.min.js": "/app/assets/node/js/jquery.min.js",
+    "/app/assets/node/js/crypto-js.js": "/app/assets/node/js/crypto-js.js",
     "/app/assets/node/css/bootstrap.min.css": "/app/assets/node/css/bootstrap.min.css"
 }

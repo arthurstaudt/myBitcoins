@@ -1,11 +1,12 @@
 var urlData = "https://www.mercadobitcoin.net/api/v2/ticker/",
     urlTAPI = "https://www.mercadobitcoin.net/tapi/v3/",
     identifier = "",
-    secret = "";
+    secret = "",
+    pin = "";
 
 /**
  *
- * @returns {{}}
+ * @returns {*}
  * @constructor
  */
 function MercadoBitcoinCaller() {
@@ -86,9 +87,8 @@ function reloadValues() {
 }
 
 function testApi() {
-
     var tapi_nonce = Math.round(new Date().getTime() / 1000),
-        tapi_mac = CryptoJS.HmacSHA512('/tapi/v3/?tapi_method=list_orders&tapi_nonce='+tapi_nonce, secret).toString(CryptoJS.enc.Hex),
+        tapi_mac = CryptoJS.HmacSHA512('/tapi/v3/?tapi_method=list_orders&tapi_nonce='+tapi_nonce, secret).toString(),
         settings = {
             "url": urlTAPI,
             "method": "POST",
@@ -117,9 +117,13 @@ chrome.runtime.onInstalled.addListener(function () {
         /**
          * Load ENV data
          */
-        $.getJSON('env.json', function (data) {
-            identifier = data.tapi_id;
-            secret = data.secret;
+        $.ajax('env.json').done(function (data) {
+            var result = $.parseJSON(data);
+            identifier = result.tapi_id;
+            secret = result.secret;
+            pin = result.pin;
+
+            testApi();
         });
 
         /**
@@ -131,7 +135,5 @@ chrome.runtime.onInstalled.addListener(function () {
          * Call every minute
          */
         setInterval(reloadValues, 30 * 1000);
-
-        testApi();
     });
 });

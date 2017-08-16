@@ -15,9 +15,9 @@ npm install
 npm run production
 ```
 
-3 - Renomear arquivo `app/_env.json` para `app/env.json`
+3 - Renomear arquivo `app/env_example.json` para `app/env.json`
 
-4 - Inserir TAPI_ID e SECRET no arquivo `app/env.json`
+4 - Inserir TAPI_ID, SECRET e PIN no arquivo `app/env.json`
 
 
 ###Instalação no Google Chrome
