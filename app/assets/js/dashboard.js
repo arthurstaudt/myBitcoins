@@ -4,7 +4,8 @@
  * @returns {string}
  */
 function formatBitcoinValue(value) {
-    return '฿' + value.toString().replace('.',',');
+    if (value === 0) return "\u20BF 0,00000";
+    return "\u20BF" + value.toString().replace('.',',');
 }
 
 /**
@@ -13,6 +14,7 @@ function formatBitcoinValue(value) {
  * @returns {string}
  */
 function formatRealValue(value) {
+    if (value === 0) return 'R$ 0,00';
     return 'R$' + value.toFixed(2).replace('.',',');
 }
 
@@ -23,6 +25,7 @@ function formatRealValue(value) {
  * @returns {string}
  */
 function getPercentageHtmlString(invested, current) {
+    if (invested === 0) return '<span class="label label-default">- %</span>';;
     var value = (((current - invested) / invested) * 100).toFixed(2),
         classLabel = value > 0 ? 'success' : 'danger';
 
@@ -60,36 +63,42 @@ function realLabel(value) {
  * Exec when open the popup
  */
 document.addEventListener('DOMContentLoaded', function() {
+    /**
+     * Load ENV data
+     */
+    $.ajax('env.json').done(function (data) {
+        var result = $.parseJSON(data),
+        identifier = result.tapi_id,
+        secret = result.secret,
+        mb = new MercadoBitcoin(identifier, secret);
 
-    $.when(MercadoBitcoinCaller()).then(function(result) {
-        var data = calcTransactions(result);
+        mb.get_account_info(function(info){
+            var balance = info.response_data.balance;
 
-        updateIconData(data.percente, data.stringPercent);
+            $.when(MercadoBitcoinCaller()).then(function(result) {
+                var data = calcTransactions(result, balance.btc.available, balance.brl.available);
 
-        /**
-         * Set the LIVE values
-         */
-        $('#buy').text(formatRealValue(data.ticker.buy));
-        $('#sell').text(formatRealValue(data.ticker.sell));
-        $('#invested').text(formatRealValue(data.invested));
-        $('#current').text(formatRealValue(data.current));
+                if (balance.btc.available > 0.00001) {
+                    updateIconData(data.percente, data.stringPercent);
+                }
 
-        $('#my-bitcoins').html(bitcoinLabel(formatBitcoinValue(data.myBiticoins)));
-        $('#change-taxe').html(taxesLabel(formatBitcoinValue(data.changeBitcoinTaxe)));
-        $('#change').html(realLabel(formatRealValue(data.change)));
-        $('#push-taxe').html(taxesLabel(formatRealValue(data.pushTaxe)));
-        $('#push').html(realLabel(formatRealValue(data.push)));
+                /**
+                 * Set the LIVE values
+                 */
+                $('#buy').text(formatRealValue(data.ticker.buy));
+                $('#sell').text(formatRealValue(data.ticker.sell));
+                $('#invested').text(formatRealValue(data.invested));
+                $('#current').text(formatRealValue(data.current));
 
-        $('#change-win').prepend(formatRealValue(data.change)).find('.infos').append(formatRealValue(data.change - data.invested) + '<br/>' + getPercentageHtmlString(data.invested, data.change));
-        $('#push-win').prepend(formatRealValue(data.push)).find('.infos').append(formatRealValue(data.push - data.invested) + '<br/>' + getPercentageHtmlString(data.invested, data.push));
-    });
+                $('#my-bitcoins').html(bitcoinLabel(formatBitcoinValue(data.myBiticoins)));
+                $('#change-taxe').html(taxesLabel(formatBitcoinValue(data.changeBitcoinTaxe)));
+                $('#change').html(realLabel(formatRealValue(data.change)));
+                $('#push-taxe').html(taxesLabel(formatRealValue(data.pushTaxe)));
+                $('#push').html(realLabel(formatRealValue(data.push)));
 
-    $('.up-down').click(function(){
-        var $history = $('#history');
-        $(this).addClass('glyphicon-chevron-up').removeClass('glyphicon-chevron-down');
-        if ($history.is(':visible')) {
-            $(this).addClass('glyphicon-chevron-down').removeClass('glyphicon-chevron-up');
-        }
-        $history.toggle();
+                $('#change-win').prepend(formatRealValue(data.change)).find('.infos').append(formatRealValue(data.change - data.invested) + '<br/>' + getPercentageHtmlString(data.invested, data.change));
+                $('#push-win').prepend(formatRealValue(data.push)).find('.infos').append(formatRealValue(data.push - data.invested) + '<br/>' + getPercentageHtmlString(data.invested, data.push));
+            });
+        });
     });
 });

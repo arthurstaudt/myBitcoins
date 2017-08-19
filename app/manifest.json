@@ -18,6 +18,7 @@
         "scripts": [
             "assets/node/js/jquery.min.js",
             "assets/node/js/crypto-js.js",
+            "assets/js/mercadobitcoin.js",
             "assets/js/background.js"
         ],
         "persistent": true

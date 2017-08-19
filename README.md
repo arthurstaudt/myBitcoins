@@ -5,19 +5,15 @@ do bitcoin no Mercado Bitcoin.*
 
 ###Instalação do Projeto
 
-1 - Executar npm (bower, gulp):
+Executar npm
 ```sh
 npm install
-```
-
-2 - Copiar Jquery, crypto e bootstrap (js, css)
-```sh
 npm run production
 ```
 
-3 - Renomear arquivo `app/env_example.json` para `app/env.json`
+Renomeie arquivo `app/env_example.json` para `app/env.json`
 
-4 - Inserir TAPI_ID, SECRET e PIN no arquivo `app/env.json`
+Insera seu TAPI_ID e SECRET no arquivo `app/env.json`
 
 
 ###Instalação no Google Chrome
