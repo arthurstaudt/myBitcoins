@@ -110,8 +110,9 @@ chrome.runtime.onInstalled.addListener(function () {
          * Load ENV data
          */
         $.ajax('env.json').done(function (data) {
-            var result = $.parseJSON(data),
-            identifier = result.tapi_id,
+            var result = $.parseJSON(data);
+
+            identifier = result.tapi_id;
             secret = result.secret;
 
             /**
