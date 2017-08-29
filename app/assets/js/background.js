@@ -1,6 +1,7 @@
 var urlData = "https://www.mercadobitcoin.net/api/v2/ticker/",
     identifier = "",
-    secret = "";
+    secret = "",
+    balance = [];
 
 /**
  *
@@ -44,7 +45,7 @@ function calcTransactions(data, currentBitcoin, currentReal) {
             ticker: {}
         };
 
-    currentBitcoin = Number(currentBitcoin).toFixed(5) > 0.01 ? Number(currentBitcoin).toFixed(5) : 0;
+    currentBitcoin = Number(currentBitcoin).toFixed(5) > 0.00001 ? Number(currentBitcoin).toFixed(5) : 0;
     currentReal = Number(currentReal).toFixed(2) > 0.01 ? Number(currentReal).toFixed(2) : 0;
 
     if (typeof data.ticker === "object") {
@@ -53,7 +54,9 @@ function calcTransactions(data, currentBitcoin, currentReal) {
 
         if (currentBitcoin > 0) {
             result.changeBitcoinTaxe = result.myBiticoins * 0.007; // 0,70%
-            result.current = (result.myBiticoins * data.ticker.buy);
+            result.changeBitcoinTaxe = result.changeBitcoinTaxe.toFixed(5);
+            result.current = result.myBiticoins * data.ticker.buy;
+            result.current.toFixed(5);
             result.changeTaxe = result.current * 0.007; // 0,70%
             result.change = result.current - result.changeTaxe;
             result.pushTaxe = (result.change * 0.0199) + 2.90; // 1,99% + R$ 2,90
@@ -79,24 +82,30 @@ function updateIconData(percente, string) {
 }
 
 /**
+ * Get Balance
+ */
+function getBalance() {
+    var mb = new MercadoBitcoin(identifier, secret);
+
+    mb.get_account_info(function(info) {
+        balance = info.response_data.balance;
+        reloadValues();
+    });
+}
+
+/**
  * Update data
  */
 function reloadValues() {
-    var mb = new MercadoBitcoin(identifier, secret);
+    var bitcoin = balance.btc.available || 0,
+        real = balance.brl.available || 0;
 
-    mb.get_account_info(function(info){
-        var balance = info.response_data.balance;
+    $.when(MercadoBitcoinCaller()).then(function(result){
+        var data = calcTransactions(result, bitcoin, real);
 
-        /**
-         * Update icon data
-         */
-        $.when(MercadoBitcoinCaller()).then(function(result){
-            var data = calcTransactions(result, balance.btc.available, balance.brl.available);
-
-            if (balance.btc.available > 0.00001) {
-                updateIconData(data.percente, data.stringPercent);
-            }
-        });
+        if (bitcoin > 0.00001 && real > 0.01) {
+            updateIconData(data.percente, data.stringPercent);
+        }
     });
 }
 
@@ -118,7 +127,7 @@ chrome.runtime.onInstalled.addListener(function () {
             /**
              * Call the first time
              */
-            reloadValues();
+            getBalance();
 
             /**
              * Call every minute

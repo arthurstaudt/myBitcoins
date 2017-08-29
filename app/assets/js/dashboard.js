@@ -73,12 +73,14 @@ document.addEventListener('DOMContentLoaded', function() {
         mb = new MercadoBitcoin(identifier, secret);
 
         mb.get_account_info(function(info){
-            var balance = info.response_data.balance;
+            var balance = info.response_data.balance,
+                bitcoin = balance.btc.available || 0,
+                real = balance.brl.available || 0;
 
             $.when(MercadoBitcoinCaller()).then(function(result) {
-                var data = calcTransactions(result, balance.btc.available, balance.brl.available);
+                var data = calcTransactions(result, bitcoin, real);
 
-                if (balance.btc.available > 0.00001) {
+                if (bitcoin > 0.00001 && real > 0.01) {
                     updateIconData(data.percente, data.stringPercent);
                 }
 
