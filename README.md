@@ -9,12 +9,9 @@ Executar npm
 ```sh
 npm install
 npm run production
+mv app/env_example.json app/env.json
 ```
-
-Renomeie arquivo `app/env_example.json` para `app/env.json`
-
-Insera seu TAPI_ID e SECRET no arquivo `app/env.json`
-
+Edite o arquivo `app/env.json` inserindo seu TAPI_ID e SECRET gerado no site do Mercado Bitcoin
 
 ## Instalação no Google Chrome
 
