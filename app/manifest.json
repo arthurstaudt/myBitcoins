@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Meus Ganhos - Mercado Bitcoin",
-	"version": "1.4.0",
+	"version": "1.4.1",
 	"description": "Mercado Bitcoin",
     "icons": {
         "48": "assets/images/icon48.png",

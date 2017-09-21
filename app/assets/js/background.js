@@ -28,11 +28,11 @@ function MercadoBitcoinCaller() {
 /**
  *
  * @param data
- * @returns {{invested: number, myBiticoins: number, changeBitcoinTaxe: number, current: number, changeTaxe: number, change: number, pushTaxe: number, push: number, percente: number, stringPercent: number, ticker: {}}}
+ * @param currentBitcoin
+ * @returns {{myBiticoins: number, changeBitcoinTaxe: number, current: number, changeTaxe: number, change: number, pushTaxe: number, push: number, percente: number, stringPercent: number, ticker: {}}}
  */
-function calcTransactions(data, currentBitcoin, currentReal) {
+function calcTransactions(data, currentBitcoin) {
     var result = {
-            invested: 0,
             myBiticoins: 0,
             changeBitcoinTaxe: 0,
             current: 0,
@@ -46,11 +46,9 @@ function calcTransactions(data, currentBitcoin, currentReal) {
         };
 
     currentBitcoin = Number(currentBitcoin).toFixed(5) > 0.00001 ? Number(currentBitcoin).toFixed(5) : 0;
-    currentReal = Number(currentReal).toFixed(2) > 0.01 ? Number(currentReal).toFixed(2) : 0;
 
     if (typeof data.ticker === "object") {
         result.myBiticoins = currentBitcoin;
-        result.invested = currentReal;
 
         if (currentBitcoin > 0) {
             result.changeBitcoinTaxe = result.myBiticoins * 0.007; // 0,70%
@@ -61,8 +59,6 @@ function calcTransactions(data, currentBitcoin, currentReal) {
             result.change = result.current - result.changeTaxe;
             result.pushTaxe = (result.change * 0.0199) + 2.90; // 1,99% + R$ 2,90
             result.push = result.change - result.pushTaxe;
-            result.percente = ((result.push - result.invested) / result.invested) * 100;
-            result.stringPercent = result.percente > 9 || result.percente < -9 ? result.percente.toFixed(0) : result.percente.toFixed(1);
         }
 
         result.ticker = data.ticker;
@@ -72,13 +68,11 @@ function calcTransactions(data, currentBitcoin, currentReal) {
 }
 
 /**
- *
- * @param percente
- * @param string
+ * @param buy
  */
-function updateIconData(percente, string) {
-    chrome.browserAction.setBadgeBackgroundColor({color: (percente > 0 ? '#009800' : '#ff0000')});
-    chrome.browserAction.setBadgeText({text: Math.abs(string) + '%'});
+function updateIconData(buy) {
+    chrome.browserAction.setBadgeBackgroundColor({color: '#999999'});
+    chrome.browserAction.setBadgeText({text: buy.toString().substr(0, 2) + '.' + buy.toString().substr(2, 1)});
 }
 
 /**
@@ -97,15 +91,8 @@ function getBalance() {
  * Update data
  */
 function reloadValues() {
-    var bitcoin = balance.btc.available || 0,
-        real = balance.brl.available || 0;
-
     $.when(MercadoBitcoinCaller()).then(function(result){
-        var data = calcTransactions(result, bitcoin, real);
-
-        if (bitcoin > 0.00001 && real > 0.01) {
-            updateIconData(data.percente, data.stringPercent);
-        }
+        updateIconData(result.ticker.buy);
     });
 }
 
