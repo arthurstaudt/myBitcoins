@@ -1,9 +1,9 @@
-#myBitcoins - Chrome Extension
+# myBitcoins - Chrome Extension
 
 *Essa extensão tem como objetivo acompanhar em tempo real a valorização/desvalorização
 do bitcoin no Mercado Bitcoin.*
 
-###Instalação do Projeto
+## Instalação do Projeto
 
 Executar npm
 ```sh
@@ -16,7 +16,7 @@ Renomeie arquivo `app/env_example.json` para `app/env.json`
 Insera seu TAPI_ID e SECRET no arquivo `app/env.json`
 
 
-###Instalação no Google Chrome
+## Instalação no Google Chrome
 
 *Importar somente a pasta `app/` do projeto nas Extensões do Chrome:*
 - [chrome://extensions](chrome://extensions)
