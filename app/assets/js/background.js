@@ -17,7 +17,7 @@ function MercadoBitcoinCaller() {
         typeData: 'json',
         cache: false
     }).done(function (data) {
-        dfd.resolve($.parseJSON(data));
+        dfd.resolve(data);
     }).fail(function () {
         dfd.reject({});
     });
@@ -48,13 +48,13 @@ function calcTransactions(data, currentBitcoin) {
     currentBitcoin = Number(currentBitcoin).toFixed(5) > 0.00001 ? Number(currentBitcoin).toFixed(5) : 0;
 
     if (typeof data.ticker === "object") {
-        result.myBiticoins = currentBitcoin;
+        result.myBiticoins = parseFloat(currentBitcoin);
 
         if (currentBitcoin > 0) {
             result.changeBitcoinTaxe = result.myBiticoins * 0.007; // 0,70%
-            result.changeBitcoinTaxe = result.changeBitcoinTaxe.toFixed(5);
+            result.changeBitcoinTaxe = parseFloat(result.changeBitcoinTaxe.toFixed(5));
             result.current = result.myBiticoins * data.ticker.buy;
-            result.current.toFixed(5);
+            result.current = parseFloat(result.current.toFixed(5));
             result.changeTaxe = result.current * 0.007; // 0,70%
             result.change = result.current - result.changeTaxe;
             result.pushTaxe = (result.change * 0.0199) + 2.90; // 1,99% + R$ 2,90

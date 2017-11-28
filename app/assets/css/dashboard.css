@@ -85,3 +85,14 @@ body {
 .up-down {
     cursor: pointer;
 }
+
+#buy,
+#sell,
+#current {
+    height: 24px;
+}
+
+#change-taxe,
+#change-win {
+    height: 38px;
+}

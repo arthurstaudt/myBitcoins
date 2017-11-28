@@ -14,8 +14,8 @@ function formatBitcoinValue(value) {
  * @returns {string}
  */
 function formatRealValue(value) {
-    if (value === 0) return 'R$ 0,00';
-    return 'R$' + value.toFixed(2).replace('.',',');
+    if (parseFloat(value) === 0) return 'R$ 0,00';
+    return 'R$' + parseFloat(value).toFixed(2).replace('.',',');
 }
 
 /**
@@ -79,8 +79,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 $('#change').html(realLabel(formatRealValue(data.change)));
                 $('#push-taxe').html(taxesLabel(formatRealValue(data.pushTaxe)));
                 $('#push').html(realLabel(formatRealValue(data.push)));
-                $('#change-win').prepend(formatRealValue(data.change));
-                $('#push-win').prepend(formatRealValue(data.push));
+                $('#change-win').html(formatRealValue(data.change));
+                $('#push-win').html(formatRealValue(data.push));
             });
         });
     });
