@@ -82,6 +82,16 @@ function getBalance() {
     var mb = new MercadoBitcoin(identifier, secret);
 
     mb.get_account_info(function(info) {
+        if (info.status_code !== 100) {
+            chrome.notifications.create('warning', {
+                type: 'basic',
+                iconUrl: 'assets/images/icon48.png',
+                title: 'Alerta!',
+                message: info.error_message
+            }, function(notificationId) {});
+            return false;
+        }
+
         balance = info.response_data.balance;
         reloadValues();
     });
@@ -93,7 +103,37 @@ function getBalance() {
 function reloadValues() {
     $.when(MercadoBitcoinCaller()).then(function(result){
         updateIconData(result.ticker.buy);
+
+        var buy = parseFloat(result.ticker.buy),
+            sell = parseFloat(result.ticker.sell);
+
+        if (buy < 38000) {
+            // showSellNotification(buy.toFixed(2).toString());
+        }
+        if (sell > 45000) {
+            // showBuyNotification(sell.toFixed(2).toString());
+        }
     });
+}
+
+/**
+ * Show notifications
+ */
+function showSellNotification(val) {
+    chrome.notifications.create('warning', {
+        type: 'basic',
+        iconUrl: 'assets/images/icon48.png',
+        title: 'Hora de COMPRAR!!!',
+        message: 'O valor do Bitcoin esta ' + val + '!'
+    }, function(notificationId) {});
+}
+function showBuyNotification(val) {
+    chrome.notifications.create('warning', {
+        type: 'basic',
+        iconUrl: 'assets/images/icon48.png',
+        title: 'Hora de VENDER!!!',
+        message: 'O valor do Bitcoin esta ' + val + '!'
+    }, function(notificationId) {});
 }
 
 /**
@@ -106,7 +146,7 @@ chrome.runtime.onInstalled.addListener(function () {
          * Load ENV data
          */
         $.ajax('env.json').done(function (data) {
-            var result = $.parseJSON(data);
+            var result = typeof data !== 'object' ? $.parseJSON(data) : data;
 
             identifier = result.tapi_id;
             secret = result.secret;

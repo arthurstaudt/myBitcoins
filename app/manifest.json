@@ -27,6 +27,7 @@
         "tabs",
         "declarativeContent",
         "storage",
+        "notifications",
         "https://www.mercadobitcoin.net/api/v2/ticker/",
         "https://www.mercadobitcoin.net/tapi/v3/"
     ]

@@ -53,12 +53,22 @@ document.addEventListener('DOMContentLoaded', function() {
      * Load ENV data
      */
     $.ajax('env.json').done(function (data) {
-        var result = $.parseJSON(data),
+        var result = typeof data !== 'object' ? $.parseJSON(data) : data,
         identifier = result.tapi_id,
         secret = result.secret,
         mb = new MercadoBitcoin(identifier, secret);
 
         mb.get_account_info(function(info){
+            if (info.status_code !== 100) {
+                chrome.notifications.create('warning', {
+                    type: 'basic',
+                    iconUrl: 'assets/images/icon48.png',
+                    title: 'Alerta!',
+                    message: info.error_message
+                }, function(notificationId) {});
+                return false;
+            }
+
             var balance = info.response_data.balance,
                 bitcoin = balance.btc.available || 0;
 
