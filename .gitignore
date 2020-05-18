@@ -2,3 +2,5 @@
 node_modules
 app/assets/node
 app/env.json
+.DS_Store
+package-lock.json

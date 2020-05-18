@@ -1,7 +1,15 @@
 # myBitcoins - Chrome Extension
 
 *Essa extensão tem como objetivo acompanhar em tempo real a valorização/desvalorização
-do bitcoin no Mercado Bitcoin.*
+do bitcoin no **Mercado Bitcoin**.*
+
+![](app/assets/images/example.png)
+
+## API utilizada do Mercado Bitcoin
+
+```
+v3 - https://www.mercadobitcoin.com.br/api-doc/
+```
 
 ## Instalação do Projeto
 

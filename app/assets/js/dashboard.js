@@ -4,8 +4,8 @@
  * @returns {string}
  */
 function formatBitcoinValue(value) {
-    if (value === 0) return "\u20BF 0,00000";
-    return "\u20BF" + value.toString().replace('.',',');
+    if (value === 0) return "\u20BF 0,0000000";
+    return "\u20BF " + value.toFixed(7).toString().replace('.',',');
 }
 
 /**
@@ -15,7 +15,7 @@ function formatBitcoinValue(value) {
  */
 function formatRealValue(value) {
     if (parseFloat(value) === 0) return 'R$ 0,00';
-    return 'R$' + parseFloat(value).toFixed(2).replace('.',',');
+    return 'R$ ' + parseFloat(value).toFixed(2).replace('.',',').replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
 }
 
 /**
@@ -34,6 +34,15 @@ function bitcoinLabel(value) {
  */
 function taxesLabel(value) {
     return '<span class="label label-danger">' + value + '</span>';
+}
+
+/**
+ * Set yellow label for alerts
+ * @param value
+ * @returns {string}
+ */
+function alertLabel(value) {
+    return '<span class="label label-warning">' + value + '</span>';
 }
 
 /**
@@ -86,6 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 $('#my-bitcoins').html(bitcoinLabel(formatBitcoinValue(data.myBiticoins)));
                 $('#change-taxe').html(taxesLabel(formatBitcoinValue(data.changeBitcoinTaxe)));
+                $('#change-taxe-real').html(alertLabel("Aprox. " + formatRealValue(data.ticker.sell * data.changeBitcoinTaxe)));
                 $('#change').html(realLabel(formatRealValue(data.change)));
                 $('#push-taxe').html(taxesLabel(formatRealValue(data.pushTaxe)));
                 $('#push').html(realLabel(formatRealValue(data.push)));
