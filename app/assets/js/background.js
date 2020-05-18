@@ -1,4 +1,4 @@
-var urlData = "https://www.mercadobitcoin.net/api/v2/ticker/",
+var urlData = "https://www.mercadobitcoin.net/api/BTC/ticker/",
     identifier = "",
     secret = "",
     balance = [];
@@ -45,16 +45,16 @@ function calcTransactions(data, currentBitcoin) {
             ticker: {}
         };
 
-    currentBitcoin = Number(currentBitcoin).toFixed(5) > 0.00001 ? Number(currentBitcoin).toFixed(5) : 0;
+    currentBitcoin = Number(currentBitcoin).toFixed(7) > 0.0000001 ? Number(currentBitcoin).toFixed(7) : 0;
 
     if (typeof data.ticker === "object") {
         result.myBiticoins = parseFloat(currentBitcoin);
 
         if (currentBitcoin > 0) {
             result.changeBitcoinTaxe = result.myBiticoins * 0.007; // 0,70%
-            result.changeBitcoinTaxe = parseFloat(result.changeBitcoinTaxe.toFixed(5));
-            result.current = result.myBiticoins * data.ticker.buy;
-            result.current = parseFloat(result.current.toFixed(5));
+            result.changeBitcoinTaxe = parseFloat(result.changeBitcoinTaxe.toFixed(7));
+            result.current = result.myBiticoins * data.ticker.sell;
+            result.current = parseFloat(result.current.toFixed(7));
             result.changeTaxe = result.current * 0.007; // 0,70%
             result.change = result.current - result.changeTaxe;
             result.pushTaxe = (result.change * 0.0199) + 2.90; // 1,99% + R$ 2,90
