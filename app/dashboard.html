@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>My Bitcoins</title>
+    <meta charset="utf-8">
     <link href="assets/node/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="assets/css/dashboard.css" rel="stylesheet"/>
     <script src="assets/node/js/jquery.min.js"></script>
@@ -16,63 +17,101 @@
     <div class="row">
         <div class="col-sm-4 text-center">
             <div class="panel panel-default">
-                <div class="panel-heading">M. Bitcoin compra por</div>
-                <div id="buy" class="panel-body">-</div>
+                <div class="panel-heading">Mercado Bitcoin compra por</div>
+                <div id="buy" class="panel-body">...</div>
             </div>
         </div>
         <div class="col-sm-4 text-center">
             <div class="panel panel-default">
-                <div class="panel-heading">M. Bitcoin vende por</div>
-                <div id="sell" class="panel-body">-</div>
+                <div class="panel-heading">Mercado Bitcoin vende por</div>
+                <div id="sell" class="panel-body">...</div>
             </div>
         </div>
         <div class="col-sm-4 text-center">
             <div class="panel panel-default">
-                <div class="panel-heading">Valor Atual</div>
-                <div id="current" class="panel-body">-</div>
+                <div class="panel-heading">Valor Convertido s/ taxa</div>
+                <div id="current" class="panel-body">...</div>
             </div>
         </div>
     </div>
 
     <div class="row icons-charts">
-        <div class="col-sm-2 col-sm-offset-1 text-center">
-            <span class="bitcoin-icon glyphicon glyphicon-bitcoin"></span><br/>
-            <span id="my-bitcoins"></span>
-        </div>
         <div class="col-sm-2 text-center">
-            <span id="change-taxe"></span><br/>
+            <span class="bitcoin-icon glyphicon glyphicon-bitcoin"></span><br/>
+            <span id="my-bitcoins"><span class="label label-default">...</span></span>
+        </div>
+        <div class="col-sm-3 text-center">
+            <span id="change-taxe-real"><span class="label label-default">...</span></span><br/>
             <span class="transaction-icon glyphicon glyphicon-transfer"></span><br/>
-            <span id="change-taxe-real"></span>
+            <span id="change-taxe"><span class="label label-default">...</span></span>
         </div>
         <div class="col-sm-2 text-center">
             <span class="card-icon glyphicon glyphicon-credit-card"></span>
-            <div id="change"></div>
+            <div id="change"><span class="label label-default">...</span></div>
         </div>
-        <div class="col-sm-2 text-center">
-            <span id="push-taxe"></span><br/>
-            <span class="transaction-icon glyphicon glyphicon-transfer"></span>
-            <span id="push-taxe-real"><span class="label label-warning">1,99% + R$ 2,90</span></span>
+        <div class="col-sm-3 text-center">
+            <span id="push-taxe-real"><span class="label label-default">...</span></span><br/>
+            <span class="transaction-icon glyphicon glyphicon-transfer"></span><br/>
+            <span id="push-taxe"><span class="label label-default">...</span></span>
         </div>
         <div class="col-sm-2 text-center">
             <span class="pig-icon glyphicon glyphicon-piggy-bank"></span>
-            <div id="push"></div>
+            <div id="push"><span class="label label-default">...</span></div>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-sm-4 col-sm-offset-2 text-center">
+        <div class="col-sm-5 col-sm-offset-1 text-center">
             <div class="panel panel-default">
-                <div class="panel-heading">Valor Convertido</div>
-                <div id="change-win" class="panel-body results">-</div>
+                <div class="panel-heading">Valor Convertido c/ taxa</div>
+                <div id="change-win" class="panel-body results">...</div>
             </div>
         </div>
-        <div class="col-sm-4 text-center">
+        <div class="col-sm-5 text-center">
             <div class="panel panel-default">
                 <div class="panel-heading">Valor para Saque</div>
-                <div id="push-win" class="panel-body results">-</div>
+                <div id="push-win" class="panel-body results">...</div>
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Calculadora Simples</div>
+
+                <div class="col-sm-4" id="initial-value-field">
+                    <label for="initial-value">Último valor aplicado:</label><br/>
+                    <input type="text" id="initial-value" class="input-sm"/>
+                    <input type="hidden" id="pure-initial-value"/>
+                </div>
+
+                <div id="calc-results" class="col-sm-8 hide">
+                    <div class="col-sm-2 text-center">
+                        <span class="mini-transaction-icon glyphicon glyphicon-transfer"></span>
+                    </div>
+
+                    <div class="col-sm-4 text-center">
+                        <span id="calc-change-win"></span><br/>
+                        <span id="calc-change-win-percent"></span>
+                    </div>
+
+                    <div class="col-sm-2 text-center">
+                        <span class="mini-transaction-icon glyphicon glyphicon-transfer"></span>
+                    </div>
+
+                    <div class="col-sm-4 text-center">
+                        <span id="calc-push-win"></span><br/>
+                        <span id="calc-push-win-percent"></span>
+                    </div>
+                </div>
+
+                <br style="clear: both;"/>
+
+            </div>
+        </div>
+    </div>
+
 
 </div>
 

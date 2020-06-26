@@ -60,6 +60,12 @@ body {
     text-shadow: 3px 3px 2px #ccc;
 }
 
+.mini-transaction-icon {
+    font-size: 20px;
+    margin: 25px 0;
+    text-shadow: 3px 3px 2px #ccc;
+}
+
 .label {
     font-size: 10px;
 }
@@ -95,4 +101,20 @@ body {
 #change-taxe,
 #change-win {
     height: 38px;
+}
+
+#initial-value-field {
+    margin-top: 15px;
+}
+
+#initial-value {
+    width: 150px;
+    height: 20px;
+    margin-bottom: 15px;
+}
+
+#calc-change-win,
+#calc-push-win {
+    margin-top: 15px;
+    display: block;
 }
